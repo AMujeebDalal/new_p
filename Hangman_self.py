@@ -3,17 +3,19 @@ import random
 from words import word_list
 from hangman_art import logo, stages
 from replit import clear
-word = random.choice(word_list)
-print(word)
-print("Welcome to Hangman")
+
 print(logo)
+
+word = random.choice(word_list)
 display = []
-lives = 6
+lives = len(stages) - 1
+end_of_game = False
+hangman = stages[6]
+
 for i in word:
   display.append('_')
 print(display)
-end_of_game = False
-hangman = stages[6]
+
 while not end_of_game:
   guess = input("Guess a letter\n").lower()
   clear()
@@ -33,8 +35,10 @@ while not end_of_game:
     else:
       print("You have entered wrong letter, it's not in the word.")
       lives -=1
+      
   hangman = stages[lives]
   print(display," ", hangman)
+
   if '_' not in display:
     end_of_game = True
     print("You win!")
